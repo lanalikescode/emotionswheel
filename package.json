@@ -1,0 +1,10 @@
+{
+  "name": "emotions-wheel",
+  "version": "1.0.0",
+  "description": "An interactive, spinnable emotions wheel drawn in SVG, with a definition popup for every emotion.",
+  "private": true,
+  "scripts": {
+    "test": "node tests/run-checks.js",
+    "start": "npx --yes serve ."
+  }
+}

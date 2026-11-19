@@ -1,0 +1,73 @@
+  :root{
+    --bg:#FBF7F1; --ink:#2B2723; --muted:#7A716A; --card:#FFFFFF; --line:#ECE4DA;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:radial-gradient(1200px 800px at 30% 20%, #FFFDF9 0%, var(--bg) 60%, #F3ECE2 100%);
+    color:var(--ink); font-family:"DM Sans",system-ui,sans-serif;
+    display:flex; flex-direction:column; min-height:100vh;
+  }
+  header{padding:22px 28px 0; display:flex; align-items:baseline; gap:14px; flex-wrap:wrap}
+  h1{font-family:"Fraunces",serif; font-weight:650; font-size:28px; margin:0; letter-spacing:-.01em}
+  header p{margin:0; color:var(--muted); font-size:14px}
+  main{flex:1; display:flex; align-items:center; justify-content:center; gap:28px; padding:12px 24px 28px; position:relative}
+  .stage{position:relative; width:min(86vh, 62vw); aspect-ratio:1; flex:none}
+  svg#wheel{width:100%; height:100%; display:block; touch-action:none; cursor:grab; user-select:none; -webkit-user-select:none; overflow:visible}
+  svg#wheel.dragging{cursor:grabbing}
+  .seg path{stroke:#fff; stroke-width:1.6; transition:opacity .35s ease, filter .25s ease; cursor:pointer}
+  .seg:hover path{filter:brightness(1.06) saturate(1.08)}
+  .seg text{pointer-events:none; fill:#2B2723; font-family:"DM Sans",sans-serif; transition:opacity .35s ease}
+  .ring0 text{font-weight:700; font-size:21px; letter-spacing:.02em}
+  .ring1 text{font-weight:600; font-size:15px}
+  .ring2 text{font-weight:500; font-size:13px}
+  .dim path{opacity:.28} .dim text{opacity:.35}
+  .sel path{stroke:#2B2723; stroke-width:2.6}
+  .pointer{fill:#2B2723; transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+  .hub{cursor:pointer}
+  .hub circle{fill:#fff; stroke:var(--line); stroke-width:2}
+  .hub text{font-family:"Fraunces",serif; font-size:17px; fill:var(--ink); text-anchor:middle; pointer-events:none}
+
+  /* popup */
+  .popup{
+    width:340px; max-width:100%; background:var(--card); border-radius:22px;
+    box-shadow:0 1px 0 rgba(0,0,0,.03), 0 18px 50px -18px rgba(70,50,30,.35);
+    padding:22px 22px 20px; position:relative; border:1px solid var(--line);
+    opacity:0; transform:translateY(10px) scale(.97); pointer-events:none;
+    transition:opacity .3s ease, transform .4s cubic-bezier(.2,.9,.25,1.15);
+  }
+  .popup.show{opacity:1; transform:none; pointer-events:auto}
+  .popup .swatch{position:absolute; inset:0 0 auto 0; height:8px; border-radius:22px 22px 0 0}
+  .crumbs{display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:12.5px; color:var(--muted); margin:4px 0 10px}
+  .crumbs button{all:unset; cursor:pointer; display:inline-flex; align-items:center; gap:6px; padding:3px 9px 3px 6px; border-radius:99px; background:#F6F1EA}
+  .crumbs button:hover{background:#EFE7DC; color:var(--ink)}
+  .crumbs .dot{width:10px;height:10px;border-radius:50%}
+  .crumbs .sep{opacity:.5}
+  .popup h2{font-family:"Fraunces",serif; font-weight:650; font-size:34px; margin:0 0 8px; letter-spacing:-.01em}
+  .popup .def{font-size:16px; line-height:1.55; margin:0 0 14px}
+  .popup .need{font-size:13.5px; line-height:1.5; color:var(--muted); background:#FAF6F0; border-radius:12px; padding:10px 12px; margin:0 0 14px}
+  .popup .need b{color:var(--ink); font-weight:600}
+  .popup .kids-label{font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin:0 0 8px}
+  .kids{display:flex; flex-wrap:wrap; gap:7px}
+  .kids button{all:unset; cursor:pointer; font-size:14px; padding:6px 12px; border-radius:99px; font-weight:500; transition:transform .15s ease, filter .15s}
+  .kids button:hover{transform:translateY(-1px); filter:brightness(.97)}
+  .close{all:unset; cursor:pointer; position:absolute; top:16px; right:14px; width:30px; height:30px; display:grid; place-items:center; border-radius:50%; color:var(--muted); font-size:20px}
+  .close:hover{background:#F3EDE5; color:var(--ink)}
+  .hint{position:absolute; bottom:6px; left:50%; transform:translateX(-50%); font-size:12.5px; color:var(--muted); white-space:nowrap; pointer-events:none}
+  .placeholder{width:340px; color:var(--muted); font-size:15px; line-height:1.6}
+  .placeholder h3{font-family:"Fraunces",serif; color:var(--ink); font-size:22px; margin:0 0 6px; font-weight:500}
+  .side{position:relative; width:340px; flex:none; display:grid}
+  .side > *{grid-area:1/1}
+
+  @media (max-width: 860px){
+    main{flex-direction:column; justify-content:flex-start; gap:14px; padding:8px 14px 24px}
+    .hint{display:none}
+    .stage{width:min(94vw, 70vh)}
+    .side{width:min(94vw, 420px)}
+    .popup,.placeholder{width:100%}
+    header{padding:16px 18px 0}
+  }
+
+  /* Embed mode: just the wheel and the popup, no title */
+  .embed header{display:none}
+  .embed main{padding-top:16px}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emotions Wheel — check my changes</title>
+<style>
+  body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif; background:#FBF7F1; color:#2B2723; max-width:720px; margin:40px auto; padding:0 20px; line-height:1.55}
+  h1{font-size:26px; margin:0 0 4px}
+  .sub{color:#7A716A; margin:0 0 24px}
+  .box{border-radius:16px; padding:18px 20px; margin:0 0 16px; background:#fff; border:1px solid #ECE4DA}
+  .ok{border-left:8px solid #6CC7A5}
+  .bad{border-left:8px solid #EE6B6B}
+  .warn{border-left:8px solid #F7CC4F}
+  h2{font-size:18px; margin:0 0 8px}
+  ul{margin:6px 0 0; padding-left:20px}
+  li{margin:4px 0}
+  code{background:#F3EDE5; padding:1px 6px; border-radius:6px}
+  a{color:#4C6FBF}
+</style>
+</head>
+<body>
+<h1>Check my changes</h1>
+<p class="sub">This page reads <code>emotions.js</code> and tells you if anything looks wrong. Refresh it after every edit.</p>
+<div id="out"><div class="box">Checking…</div></div>
+<p><a href="index.html">← Back to the wheel</a></p>
+
+<script>
+  // Catch typos (missing commas, quotes, brackets) in emotions.js and report the line.
+  var loadError = null;
+  window.addEventListener("error", function (e) {
+    if (e.filename && e.filename.indexOf("emotions.js") !== -1) {
+      loadError = { message: e.message, line: e.lineno };
+    }
+  });
+</script>
+<script src="emotions.js"></script>
+<script src="checks.js"></script>
+<script>
+  var out = document.getElementById("out");
+  function esc(s){ return String(s).replace(/[&<>]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c]; }); }
+  function list(items){ return "<ul>" + items.map(function(i){ return "<li>" + esc(i) + "</li>"; }).join("") + "</ul>"; }
+
+  if (loadError || typeof EMOTIONS === "undefined") {
+    out.innerHTML =
+      '<div class="box bad"><h2>✗ emotions.js has a typo</h2>' +
+      (loadError ? "<p>Around <b>line " + loadError.line + "</b>: " + esc(loadError.message) + "</p>" : "") +
+      "<p>Usually it's one of these, on that line or the line just before it:</p>" +
+      list(['A missing comma between two items  →  } {  should be  }, {',
+            'A missing or extra quote  →  "Happy  should be  "Happy"',
+            'A missing bracket  ]  or  }',
+            'A quote mark inside a definition — use ’ (curly) instead of " inside the text']) +
+      "</div>";
+  } else {
+    var r = checkEmotions(EMOTIONS);
+    var html = "";
+    if (r.problems.length) {
+      html += '<div class="box bad"><h2>✗ ' + r.problems.length + " thing(s) to fix</h2>" + list(r.problems) + "</div>";
+    } else {
+      html += '<div class="box ok"><h2>✓ All good!</h2><p>' + r.counts.core + " core, " + r.counts.middle +
+              " middle and " + r.counts.outer + ' outer emotions. <a href="index.html">Open the wheel</a> to see them.</p></div>';
+    }
+    if (r.warnings.length) {
+      html += '<div class="box warn"><h2>Worth a look (optional)</h2>' + list(r.warnings) + "</div>";
+    }
+    out.innerHTML = html;
+  }
+</script>
+</body>
+</html>

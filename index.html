@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emotions Wheel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Emotions Wheel</h1>
+  <p>Drag or flick to spin · click any emotion for its meaning</p>
+</header>
+<main>
+  <div class="stage">
+    <svg id="wheel" viewBox="-520 -520 1040 1040" aria-label="Interactive emotions wheel">
+      <defs>
+        <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#5a3c1e" flood-opacity=".18"/>
+        </filter>
+      </defs>
+      <circle r="492" fill="#fff" filter="url(#soft)"/>
+      <g id="rotor"></g>
+      <g class="hub" id="hub">
+        <circle r="66"/>
+        <text y="-4">Emotions</text>
+        <text y="16" style="font-size:12px;font-family:'DM Sans';fill:#7A716A">reset</text>
+      </g>
+      <path id="pointer" class="pointer" d="M 505 0 L 528 -13 L 528 13 Z"/>
+    </svg>
+    <div class="hint" id="hint">Tip: scroll to rotate too</div>
+  </div>
+  <div class="side">
+    <div class="placeholder" id="placeholder">
+      <h3>How are you feeling?</h3>
+      Start in the centre with a broad emotion, then move outward to find a more precise word for it. Naming an emotion precisely tends to make it easier to understand — and to talk about.
+    </div>
+    <div class="popup" id="popup" role="dialog" aria-live="polite">
+      <div class="swatch" id="swatch"></div>
+      <button class="close" id="close" aria-label="Close">×</button>
+      <div class="crumbs" id="crumbs"></div>
+      <h2 id="title"></h2>
+      <p class="def" id="def"></p>
+      <p class="need" id="need"></p>
+      <div id="kidsWrap"><p class="kids-label">More specifically</p><div class="kids" id="kids"></div></div>
+    </div>
+  </div>
+</main>
+
+<!-- The words & colours live in emotions.js; the wheel itself in script.js -->
+<script src="emotions.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
