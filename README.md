@@ -23,6 +23,19 @@ An interactive emotions wheel that you can spin, click and explore. Click any em
 
 ---
 
+## Turn on the live website (one-time, about 1 minute)
+
+The "Try it" link works once GitHub Pages is switched on for this repo. If you've made your own copy (a *fork*), these steps give you your own link too:
+
+1. Go to the repo's **Settings** tab, then **Pages** in the left menu.
+2. Under **Build and deployment → Source**, choose **Deploy from a branch**.
+3. Pick branch **`main`** and folder **`/ (root)`**, then click **Save**.
+4. Wait 1–2 minutes and refresh. Your link appears at the top of that page, e.g. `https://YOUR-NAME.github.io/emotionswheel/`.
+
+From then on, every change you save on GitHub goes live automatically.
+
+---
+
 ## Use it on your own computer (no installing anything)
 
 1. On this page, click the green **Code** button, then **Download ZIP**.
@@ -66,7 +79,7 @@ It looks like this:
 3. Make your change.
 4. Click **Commit changes…** and then **Commit changes** again.
 5. Wait about a minute. GitHub checks your edit automatically:
-   - A green **✓** next to your change means it's fine. The live site updates within a minute or two.
+   - A green **✓** next to your change means it's fine. If the live website is on, it updates within a minute or two.
    - A red **✗** means something's off. Click it and then **Details** to see what to fix.
 
 ### Option B: edit on your computer
@@ -109,7 +122,7 @@ It looks like this:
 | `style.css` | How everything looks: fonts, spacing, the popup card. |
 | `checks.js` | The rules `check.html` and the automatic GitHub check use. |
 | `tests/run-checks.js` | Runs those checks from the command line (`npm test`). |
-| `.github/workflows/` | Makes GitHub run the checks and publish the live site automatically. |
+| `.github/workflows/` | Makes GitHub check your edits automatically after every change. |
 
 ---
 
